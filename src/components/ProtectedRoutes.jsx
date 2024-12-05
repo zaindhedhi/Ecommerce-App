@@ -1,8 +1,31 @@
-import React from 'react'
+import { onAuthStateChanged } from 'firebase/auth';
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { auth } from '../config/Firebase/firebaseconfig';
 
-const ProtectedRoutes = () => {
+
+const ProtectedRoutes = ({component}) => {
+    const [user , setUser] = useState(false);
+
+    // useNavigate
+    const navigate = useNavigate()
+
+    useEffect(() => {
+      onAuthStateChanged(auth , (user) => {
+        if(user){
+            setUser(true)
+            return
+        }
+            navigate('/login')
+        
+      })
+    
+    
+    }, [])
+    
   return (
-    <div>ProtectedRoutes</div>
+    user ? component : <span className="loading loading-dots loading-lg">Just a Minute</span>
+   
   )
 }
 
