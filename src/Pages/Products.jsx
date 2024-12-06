@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const Products = () => {
   const [product, setProduct] = useState(null);
@@ -20,6 +21,11 @@ const Products = () => {
       })
   }, [])
 
+  const navigate = useNavigate()
+
+  const SingleProduct = (items) => {
+    navigate(`/product/${items.id}`)
+  }
 
 
 
@@ -46,7 +52,7 @@ const Products = () => {
           <p>{items.description.slice(0 , 75)}</p>
           <p className='font-bold'>Price Rs = {items.price}</p>
           <div className="flex mt-5 gap-5 ">
-            <button className=" font-bold btn btn-info">show more</button>
+            <button onClick={()=>SingleProduct(items)} className=" font-bold btn btn-info">show more</button>
             <button className="font-bold btn btn-warning">Add To Cart</button>
           </div>
           
