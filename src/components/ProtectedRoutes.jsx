@@ -16,7 +16,7 @@ const ProtectedRoutes = ({component}) => {
             setUser(true)
             return
         }
-            navigate('/login')
+            navigate('/')
         
       })
     
