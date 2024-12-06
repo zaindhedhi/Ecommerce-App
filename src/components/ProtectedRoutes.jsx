@@ -24,7 +24,10 @@ const ProtectedRoutes = ({component}) => {
     }, [])
     
   return (
-    user ? component : <span className="loading loading-dots loading-lg">Just a Minute</span>
+    user ? component : <div className='flex justify-center items-center w-100 m-20'>
+      <h1>Just Minute<span className="flex justify-center items-center loading loading-dots loading-lg"></span></h1>
+      
+    </div>
    
   )
 }

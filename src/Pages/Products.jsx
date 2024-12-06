@@ -10,6 +10,7 @@ const Products = () => {
     .then(res => res.json())
       .then(res => {
         setProduct(res.products)
+        console.log(product)
       })
       .catch(err => {
         setError(true)
@@ -25,20 +26,38 @@ const Products = () => {
 
   return (
     <>
-    <div className="card bg-base-100 w-96 shadow-xl">
-  <figure>
-    <img
-      src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-      alt="Shoes" />
-  </figure>
-  <div className="card-body">
-    <h2 className="card-title">Shoes!</h2>
-    <p>If a dog chews shoes whose shoes does he choose?</p>
-    <div className="card-actions justify-end">
-      <button className="btn btn-primary">Buy Now</button>
+      <h1 className='text-center text-5xl font-bold  m-10 '>All Products</h1>
+    <div className='flex flex-wrap gap-5 m-20 justify-center '>
+
+    {error && <div>Error in Fetching data</div>}
+
+      {loading && <span className=" size-20 loading loading-spinner text-info"></span>}
+
+
+      {product && product.map((items) => {
+        return     <div key={items.id} className="card bg-base-100 w-80 shadow-xl border border-black">
+        <figure>
+          <img
+            src={items.thumbnail}
+            alt="logo" />
+        </figure>
+        <div className="card-body border-t-4 border-black ">
+          <h2 className="card-title">{items.title}</h2>
+          <p>{items.description.slice(0 , 75)}</p>
+          <p className='font-bold'>Price Rs = {items.price}</p>
+          <div className="flex mt-5 gap-5 ">
+            <button className=" font-bold btn btn-info">show more</button>
+            <button className="font-bold btn btn-warning">Add To Cart</button>
+          </div>
+          
+        </div>
+      </div>
+      })}
+
+
+
     </div>
-  </div>
-</div>
+    
     
     
     
